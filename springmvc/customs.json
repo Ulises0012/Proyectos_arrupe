@@ -1,0 +1,12 @@
+{
+    "elements": {},
+    "attributes": {
+        "th:text": {
+            "context": "td"
+        },
+        "xlmns": {},
+        "th:each": {},
+        "th:value": {},
+        "layout:fragment": {}
+    }
+}

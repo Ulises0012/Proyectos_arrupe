@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+    <h:head>
+        <title>Login Page</title>
+    </h:head>
+    <h:body style="font-family: Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+        <div style="background-color: #ffffff; padding: 30px 40px; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); width: 350px; text-align: center;">
+            <h1 style="margin-bottom: 10px; font-size: 28px; color: #333333;">Arrupe Studios</h1>
+            <h2 style="margin-bottom: 20px; font-size: 18px; color: #4CAF50;">Login</h2>
+            <h:form>
+                <h:panelGrid columns="1" style="width: 100%;">
+                    <h:outputLabel value="Username:" style="text-align: left; color: #555555; margin-bottom: 5px;" />
+                    <h:inputText value="#{login.username}" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #cccccc; border-radius: 5px; box-sizing: border-box;" />
+
+                    <h:outputLabel value="Password:" style="text-align: left; color: #555555; margin-bottom: 5px;" />
+                    <h:inputSecret value="#{login.password}" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #cccccc; border-radius: 5px; box-sizing: border-box;" />
+
+                    <h:commandButton value="Login" action="#{login.login}" style="width: 100%; padding: 10px; background-color: #4CAF50; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;" />
+                </h:panelGrid>
+
+                <h:outputText value="#{login.message}" style="color: red; text-align: center; margin-top: 10px;" />
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
+

@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Capacitaciones y Empleados</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:tabView>
+                <p:tab title="Mostrar Capacitaciones">
+                    <p:carousel value="#{trainingMB.capacitacionesList}"
+                                headerText="Capacitaciones" var="lista"
+                                itemStyle="text-alig:center" responsive="true">
+                        <h:panelGrid style="align-items: center">
+                            <h:outputText value="#{lista.descripcion}"/>
+                            <h:outputText value="#{lista.fecha}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                            <h:outputText value="#{lista.idCategoria.descripcion}" />
+                        </h:panelGrid>    
+                    </p:carousel>
+                </p:tab>
+                <p:tab title="Agendar a Empleados">
+                    <p:selectOneMenu value="#{trainingMB.idCapacitacion}">
+                        <f:selectItems var="lista" value="#{trainingMB.capacitacionesList}"
+                                       itemLabel="#{lista.descripcion}"
+                                       itemValue="#{lista.idCapacitacion}"/>
+                    </p:selectOneMenu>
+                    <h:panelGrid columns="5" id="checkboxDT">
+                        <p:selectCheckboxMenu id="menu"
+                                              value="#{trainingMB.codigosEmpleadosSeleccionado}"
+                                              label="Empleados" filter="true"
+                                              filterMatchMode="startWith"
+                                              panelStyle="width:250px">
+                            <f:selectItems  value="#{empleadosMB.empleadosList}"
+                                            var="listaEmpleados"
+                                       itemLabel="#{listaEmpleados.nombre} #{listaEmpleados.apellido}"
+                                       itemValue="#{listaEmpleados.codEmpleado}"/>
+                        </p:selectCheckboxMenu>                       
+                    </h:panelGrid>
+                    <p:dialog header="Capacitaciones"
+                              widgetVar="dialogTraining" modal="true" showEffect="fade"
+                              hideEffect="fade" resizable="false">
+                        <p:outputPanel id="detalle" style="text-align:center;">
+                            <p:dataList value="#{trainingMB.listaEmpleadosPorCapacitacion}"
+                                        var="listaEmpleados" type="unodered" itemType="none"
+                                        rowsPerPageLabel="5" styleClass="paginated">
+                                <f:facet name="header">
+                                    Lista de empleados para esta capacitación
+                                </f:facet>
+                                <h:outputText value="#{listaEmpleados.nombre} #{listaEmpleados.apellido}"/>
+                            </p:dataList>
+                        </p:outputPanel>
+                    </p:dialog>
+                    <h:messages />
+                </p:tab>
+            </p:tabView>
+        </h:form>
+        <ui:include src="/resources/dock.xhtml"/>
+    </h:body>
+</html>

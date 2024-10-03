@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Formulario de Propiedad</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+    <h1 th:text="${propiedad.id == null ? 'Agregar nueva propiedad' : 'Editar propiedad'}"></h1>
+
+    <form th:action="@{/propiedades/guardar}" th:object="${propiedad}" method="post">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" th:field="*{titulo}" />
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" th:field="*{descripcion}"></textarea>
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" th:field="*{direccion}" />
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" th:field="*{precio}" />
+
+        <label for="tipo">Tipo:</label>
+        <input type="text" id="tipo" th:field="*{tipo}" />
+
+        <label for="fechaPublicacion">Fecha de Publicación:</label>
+        <input type="date" id="fechaPublicacion" th:field="*{fechaPublicacion}" />
+
+        <label for="enProcesoAdquisicion">En Proceso de Adquisición:</label>
+        <input type="checkbox" id="enProcesoAdquisicion" th:field="*{enProcesoAdquisicion}" />
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="/propiedades">Volver a la lista</a>
+</body>
+</html>

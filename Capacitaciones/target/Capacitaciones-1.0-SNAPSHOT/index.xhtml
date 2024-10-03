@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Capacitaciones</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <b:commandButton value="Agregar" type="button" onclick="PF('agregar').show()"
+                             class="btn btn-success"
+                             style="margin: 10px"/>
+        </h:form>
+        
+        <p:panel>
+            <p:dialog header="Agregar" widgetVar="agregar" modal="true" width="60%">
+                <h:form id="capacitaciones_agregar">
+                    <p:panelGrid columns="1" style="width: 50%; margin: auto; text-align: center">
+                        <h:outputText value="Programar Capacitaciones"/>
+                        <p:panelGrid columns="2" style="text-align: left">
+                            <h:outputText value="Capacitación"/>
+                            <h:inputText value="#{capacitacionesMB.capacitaciones.descripcion}"
+                                         required="true" requiredMessage="Nombre requerido"/>
+                            
+                            <h:outputText value="Categoría"/>
+                            <p:selectOneMenu value="#{capacitacionesMB.capacitaciones.idCategoria.idCategoria}"
+                                             filter="true"
+                                             filterMatchMode="startsWith">
+                                <f:selectItems var="cat" value="#{capacitacionesMB.listaCategorias}" 
+                                               itemLabel="#{cat.descripcion}"
+                                               itemValue="#{cat.idCategoria}"/>
+                            </p:selectOneMenu>
+                            
+                            <h:outputText value="Fecha"/>
+                            <p:calendar showOn="button" value="#{capacitacionesMB.capacitaciones.fecha}"
+                                        required="true" requiredMessage="Fecha requerida"/>
+                        </p:panelGrid>
+                    </p:panelGrid>
+                    <p:commandButton value="Guardar" action="#{capacitacionesMB.guardarCapacitacion}" update="@form"/>
+                </h:form>
+            </p:dialog>
+
+            <h:form>
+                <b:dataTable id="capacitacion_table" var="capacitacion" 
+                             value="#{capacitacionesMB.listaCapacitaciones}">
+                    <b:dataTableColumn label="ID" value="#{capacitacion.idCapacitacion}"/>
+                    <b:dataTableColumn label="Descripción" value="#{capacitacion.descripcion}"/>
+                    <b:dataTableColumn label="Fecha">
+                        <h:outputText value="#{capacitacion.fecha}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn label="Categoría" value="#{capacitacion.idCategoria.descripcion}"/>
+                </b:dataTable>
+            </h:form>
+        </p:panel>
+        
+        <ui:include src="/resources/dock.xhtml"/>
+    </h:body>
+</html>

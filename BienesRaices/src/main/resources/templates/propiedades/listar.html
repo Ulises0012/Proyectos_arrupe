@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Lista de Propiedades</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+    <h1>Lista de Propiedades</h1>
+    <a href="/propiedades/nueva">Agregar nueva propiedad</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Dirección</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="propiedad : ${propiedades}">
+                <td th:text="${propiedad.titulo}"></td>
+                <td th:text="${propiedad.direccion}"></td>
+                <td th:text="${propiedad.precio}"></td>
+                <td>
+                    <a th:href="@{/propiedades/editar/{id}(id=${propiedad.id})}">Editar</a>
+                    <form th:action="@{/propiedades/eliminar/{id}(id=${propiedad.id})}" method="post" style="display:inline;">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

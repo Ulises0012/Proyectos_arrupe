@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+<head>
+    <title>Show Product</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="Styles.css" rel="stylesheet">
+    
+</head>
+<body>
+    <div layout:fragment="content" class="row">
+        <div class="row">
+            <div class="col-xs-8 col-md-8">
+                <h3>
+                    <a href="/product" class="btn btn-primary"><span class="glyphicon glyphicon-list"></span> Product</a>
+                </h3>
+                <h2 th:text="${product.prodName}"></h2>
+                <h2>
+                    <img th:src="${product.prodImage}" width="200"/>
+                </h2>
+                <dl class="list">
+                    <dt>Product Description</dt>
+                    <dd th:text="${product.prodDesc}"></dd>
+                    <dt>Product Price</dt>
+                    <dd th:text="${product.prodPrice}"></dd>
+                </dl>
+                <form action="/delete" method="post">
+                    <input type="hidden" name="id" th:value="${product.id}"/>
+                    <h2>
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure?');"/>
+                        <a th:href="@{/edit/{id}(id=${product.id})}" class="btn btn-warning">Edit</a>
+                    </h2>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

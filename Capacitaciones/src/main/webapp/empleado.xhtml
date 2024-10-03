@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Empleados</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <b:commandButton value="Agregar" type="button" onclick="PF('agregar').show()"
+                             class="btn btn-success" 
+                             style="margin: 10px"/>
+        </h:form>
+        <p:panel>
+            <p:dialog header="Agregar" widgetVar="agregar" modal="true" width="60%">
+                <h:form id="empleado_form">
+                    <p:panelGrid columns="1" style="width: 50%; margin: auto; text-align: center">
+                        <h:outputText value="Formulario de empleado"/>
+                        <p:panelGrid columns="2" style="text-align: left">
+                            <h:outputText value="Codigo"/>
+                            <h:inputText value="#{empleadosMB.empleado.codEmpleado}"
+                                         required="true" requiredMessage="Codigo requerido"/>
+                            
+                            <h:outputText value="Nombre"/>
+                            <h:inputText value="#{empleadosMB.empleado.nombre}"
+                                         required="true" requiredMessage="Nombre requerido"/>
+                            
+                            <h:outputText value="Apellido"/>
+                            <h:inputText value="#{empleadosMB.empleado.apellido}"
+                                         required="true" requiredMessage="Apellido requerido"/>
+                            
+                            <h:outputText value="Telefono"/>
+                            <h:inputText value="#{empleadosMB.empleado.telefono}"
+                                         required="true" requiredMessage="Telefono requerido"
+                                         validatorMessage="Telefono Incorrecto. Sugerido: 2222-2345">
+                                <f:validateRegex pattern="^[2|7|6]{1}[0-9]{3}-[0-9]{4}" />
+                            </h:inputText>
+                        </p:panelGrid>
+
+                        <b:commandButton action="#{empleadosMB.guardarEmpleado()}" value="Guardar"
+                                         class="btn btn-success">
+                            <f:ajax execute="@form" render="empleado_table empleado_form"/>                            
+                        </b:commandButton>
+                        <h:messages/>
+                    </p:panelGrid>
+                </h:form>
+            </p:dialog>
+            
+            <b:dataTable id="empleado_table" var="empleado" value="#{empleadosMB.empleadosList}">
+                <b:dataTableColumn label="Cod Empleado" value="#{empleado.codEmpleado}"/>
+                <b:dataTableColumn label="Nombre" value="#{empleado.nombre}"/>
+                <b:dataTableColumn label="Apellido" value="#{empleado.apellido}"/>
+                <b:dataTableColumn label="Telefono" value="#{empleado.telefono}"/>
+            </b:dataTable>
+        </p:panel>
+        <ui:include src="/resources/dock.xhtml" />
+    </h:body>
+</html>

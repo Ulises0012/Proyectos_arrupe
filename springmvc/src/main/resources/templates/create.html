@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="en"
+      xlmns="https://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+    <head>
+        <title>Create product</title>
+        <link href="Styles.css" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </head>
+    <body>
+        <div layout:fragment="content" class="row">
+            <div class="col-xs-12 col-md-8">
+                <h3>
+                    <a href="/product" class="btn btn-lg btn-primary">
+                        <span class="glyphicon glyphicon-list"></span>Product
+                    </a>
+                </h3>
+                <h2>Create Product</h2>
+                <form action="/save">
+                    <div class="form-group">
+                        <label for="prodName">Product name:</label>
+                        <input type="text" class="form-control" id="prodName" name="prodName"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="prodDesc">Product description:</label>
+                        <textarea class="form-control" id="prodDesc" name="prodDesc" cols="60" rows="3"/></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="prodPrice">Product price:</label>
+                        <input type="number" class="form-control" id="prodPrice" name="prodPrice"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="prodImage">Product image URL:</label>
+                        <input type="url" class="form-control" id="prodImage" name="prodImage"/>
+                    </div>
+                    <button type="submit" class="btn btn-sucess">Save</button>
+                </form>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
+    </body>
+</html>

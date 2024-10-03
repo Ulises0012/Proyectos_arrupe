@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+    <h:head>
+        <title>Home Page</title>
+    </h:head>
+    <h:body style="font-family: Arial, sans-serif; background-color: #f0f2f5; padding: 20px;">
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <h1 style="text-align: center; color: #4CAF50; margin-bottom: 20px;">Arrupe Studios</h1>
+
+            <h:form>
+                <h:dataTable value="#{empleadoBean.empleados}" var="empleado" style="width: 100%; border-collapse: collapse;">
+                    <h:column>
+                        <f:facet name="header">Nombre</f:facet>
+                        #{empleado.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Código</f:facet>
+                        #{empleado.codigo}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Área</f:facet>
+                        #{empleado.area}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Sueldo</f:facet>
+                        #{empleado.sueldo}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Acciones</f:facet>
+                        <h:commandButton value="Edit" action="#{empleadoBean.editarEmpleado(empleado)}" style="background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 5px 10px; margin-right: 5px;" />
+                        <h:commandButton value="Delete" action="#{empleadoBean.eliminarEmpleado(empleado)}" style="background-color: #f44336; color: white; border: none; border-radius: 5px; padding: 5px 10px;" />
+                    </h:column>
+                </h:dataTable>
+
+                <h:panelGrid columns="2" rendered="#{not empty empleadoBean.empleadoSeleccionado}" style="margin-top: 20px;">
+                    <h:outputLabel value="Nombre:" />
+                    <h:inputText value="#{empleadoBean.empleadoSeleccionado.nombre}" />
+
+                    <h:outputLabel value="Código:" />
+                    <h:inputText value="#{empleadoBean.empleadoSeleccionado.codigo}" />
+
+                    <h:outputLabel value="Área:" />
+                    <h:inputText value="#{empleadoBean.empleadoSeleccionado.area}" />
+
+                    <h:outputLabel value="Sueldo:" />
+                    <h:inputText value="#{empleadoBean.empleadoSeleccionado.sueldo}" />
+
+                    <h:commandButton value="Guardar" action="#{empleadoBean.guardarEmpleado}" style="background-color: #4CAF50; color: white; border: none; border-radius: 5px; padding: 5px 10px; margin-top: 10px;" />
+                </h:panelGrid>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
+
+
+
